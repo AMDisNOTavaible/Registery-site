@@ -1,0 +1,125 @@
+.form-group {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    padding-right: 40px;
+    background-color: #3d3d3d;
+    border: 1px solid #4d4d4d;
+    border-radius: 4px;
+    color: #ffffff;
+    box-sizing: border-box;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4a9eff;
+}
+
+.toggle-password {
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 32px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-password:hover {
+    background-color: transparent;
+    color: #4a9eff;
+}
+
+form {
+    background: #2d2d2d;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+.password-requirements {
+    color: #cccccc;
+    font-size: 0.8em;
+    margin: 10px 0;
+}
+
+.password-requirements ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 5px 0;
+}
+
+.password-requirements li {
+    margin: 3px 0;
+    padding-left: 15px;
+    position: relative;
+}
+
+.password-requirements li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #4a9eff;
+}
+
+.login-link {
+    margin-top: 20px;
+    background: #2d2d2d;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+.login-link a {
+    color: #4a9eff;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+.main-button {
+    width: auto !important;
+    padding: 5px 10px;
+    margin-top: 20px;
+    background-color: #4a9eff;
+}
+
+button {
+    padding: 10px;
+    background-color: #4a9eff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #357abd;
+}
+
+button[type="submit"] {
+    width: 100%;
+    margin-top: 10px;
+} 

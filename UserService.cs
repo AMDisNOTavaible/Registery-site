@@ -1,46 +1,45 @@
 using Microsoft.Data.Sqlite;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using AuthApp.Models;
+
+namespace AuthApp.Services;
 
 public class UserService
 {
     private readonly string _connectionString;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public UserService(string connectionString)
+    public UserService(string connectionString, UserManager<ApplicationUser> userManager)
     {
         _connectionString = connectionString;
+        _userManager = userManager;
     }
 
-    public bool ValidateUser(string username, string password)
+    public async Task<bool> ValidateUser(string username, string password)
     {
-        using (var connection = new SqliteConnection(_connectionString))
+        var user = await _userManager.FindByNameAsync(username);
+        if (user == null)
         {
-            connection.Open();
-            string query = "SELECT COUNT(*) FROM Users WHERE Username = @username AND Password = @password";
-            var command = new SqliteCommand(query, connection);
-            command.Parameters.AddWithValue("@username", username);
-            command.Parameters.AddWithValue("@password", password);
-
-            long userExists = (long)command.ExecuteScalar();
-            return userExists > 0;
+            return false; // Пользователь не найден
         }
+
+        return await _userManager.CheckPasswordAsync(user, password); // Проверяем пароль
     }
 
-    public List<string> GetUsers()
+    private static bool VerifyPassword(string password, string storedHash, string salt)
     {
-        List<string> users = new();
+        using var hmac = new HMACSHA512(Convert.FromBase64String(salt));
+        var computedHash = Convert.ToBase64String(
+            hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)));
+        return computedHash == storedHash;
+    }
 
-        using (var connection = new SqliteConnection(_connectionString))
-        {
-            connection.Open();
-            string query = "SELECT Username FROM Users";
-            var command = new SqliteCommand(query, connection);
-            var reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                users.Add(reader.GetString(0));
-            }
-        }
-
-        return users;
+    public async Task<IdentityResult> RegisterUser(string username, string password)
+    {
+        var user = new ApplicationUser { UserName = username };
+        var result = await _userManager.CreateAsync(user, password);
+        return result; // Return the result of the registration
     }
 }

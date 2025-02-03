@@ -1,0 +1,36 @@
+.welcome-container {
+    background: #2d2d2d;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.welcome-message {
+    font-size: 1.2em;
+    margin: 20px 0;
+    color: #ffffff;
+}
+
+#username {
+    color: #4a9eff;
+    font-weight: bold;
+}
+
+.main-button {
+    width: auto !important;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #4a9eff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.main-button:hover {
+    background-color: #357abd;
+} 
